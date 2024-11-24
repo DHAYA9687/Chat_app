@@ -97,12 +97,19 @@ body {
 .message.received {
     background-color: #e9ecef;
     align-self: flex-start;
+    margin-top: 20px;
+    min-width: 20%;
+    max-width: 80%;
+    
 }
 
 .message.sent {
     background-color: #0084ff;
     color: white;
     align-self: flex-end;
+    margin-top: 20px;
+    max-width: 80%;
+    min-width: 20%;
 }
 
 .message.sent .message-time {
