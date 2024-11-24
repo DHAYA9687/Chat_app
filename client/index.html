@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header Section -->
+        <div class="chat-header">
+            <h1>Chat Room</h1>
+            <div class="online-status">
+                <span class="status-dot"></span>
+                <span class="status-text">Online</span>
+            </div>
+        </div>
+
+        <!-- Messages Section -->
+        <div id="message-container" class="message-container">
+            <!-- Example Messages -->
+            <div class="message received">
+                <span class="message-user">John</span>
+                <p class="message-content">Hello! How are you?</p>
+                <span class="message-time">10:30 AM</span>
+            </div>
+
+            <div class="message sent">
+                <p class="message-content">Hi! I'm doing great, thanks!</p>
+                <span class="message-time">10:31 AM</span>
+            </div>
+
+            <div class="message received">
+                <span class="message-user">John</span>
+                <p class="message-content">Shall we start the meeting?</p>
+                <span class="message-time">10:32 AM</span>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="chat-input-section">
+            <!-- Room Join Form -->
+            <div class="room-form">
+                <input type="text" id="room-input" class="input-field" placeholder="Enter Room Name">
+                <button type="button" id="room-button" class="btn btn-join">Join Room</button>
+            </div>
+
+            <!-- Message Form -->
+            <form id="message-form" class="message-form">
+                <div class="message-input-container">
+                    <input 
+                        type="text" 
+                        id="message-input" 
+                        class="input-field message-input" 
+                        placeholder="Type your message here..."
+                        autocomplete="off"
+                    >
+                    <button type="submit" id="send-button" class="btn btn-send">
+                        Send
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Optional: Typing Indicator -->
+        <div class="typing-indicator hidden">
+            <span>Someone is typing...</span>
+        </div>
+    </div>
+
+    <!-- Optional: User List Sidebar -->
+    <div class="user-list-sidebar hidden">
+        <h2>Online Users</h2>
+        <ul id="users-list" class="users-list">
+            <!-- Users will be added here dynamically -->
+        </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js" type="module"></script>
+</body>
+</html>
