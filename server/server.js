@@ -6,6 +6,18 @@ const io=require("socket.io")(3000,{
 
 io.on("connection",socket=>{
     console.log("New connection")
-    socket.emit("welcome","Welcome to the chat")
+    socket.on('send-message',(message,room)=>{
+        if(room==''){
+            socket.broadcast.emit('receive-msg',message)
+        }
+        else{
+            socket.to(room).emit('receive-msg',message);
+        }
+    })
+    socket.on('join-room',room=>{
+        socket.join(room)
+    })
+
+   
     console.log(socket.id)
 });
