@@ -1,11 +1,13 @@
 import {io} from "socket.io-client"
+document.addEventListener("DOMContentLoaded",()=>{
 const socket=io("http://localhost:3000")
 const messageForm=document.querySelector(".message-form")
 const messageInput=document.querySelector(".message-input")
 const messageContainer=document.querySelector(".message-container")
 const roomInput=document.querySelector('#room-input')
 const roomButton=document.querySelector("#room-button")
-
+const chatId_Element=document.querySelector("#chat-id")
+console.log(chatId_Element)
 //get time function
 function getCurrentTime() {
     const now = new Date();
@@ -36,12 +38,13 @@ const displayMessage=(message,type="received")=>{
 }
 
 socket.on("connect",(e)=>{
-    const socket_id=socket.id
+    const socketId=socket.id
     alert(`Connected to server:${socket.id}`)
-    const p = document.createElement("p")
-    p.innerText="Connected to server:"+socket_id
-    document.querySelector(".chat-header").appendChild(p)
+    const chat="Connected to server:"+socketId
+    chatId_Element.innerText=chat;
 })
+
+
 messageForm.addEventListener("submit",(e)=>{
     e.preventDefault()
     const message=messageInput.value
@@ -64,3 +67,5 @@ roomButton.addEventListener('click',()=>{
 socket.on('receive-msg',message=>{
     displayMessage(message,'received')
 })
+
+});
