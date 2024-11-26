@@ -1,6 +1,20 @@
-import {io} from "socket.io-client"
+import { io} from "socket.io-client"
 document.addEventListener("DOMContentLoaded",()=>{
-const socket=io("http://localhost:3000")
+const socket=io("http://localhost:3000",{
+    transports:["websocket","polling"],
+})
+
+const userSocket = io("http://localhost:3000/user", {auth:{token:"test"},
+    transports: ["websocket", "polling"],
+  });
+  
+  userSocket.on("connect", () => {
+    console.log("Connected to user namespace:", userSocket.id);
+  });
+  
+ userSocket.on("connect_error",err=>{
+    displayMessage(err)
+ })
 const messageForm=document.querySelector(".message-form")
 const messageInput=document.querySelector(".message-input")
 const messageContainer=document.querySelector(".message-container")
@@ -8,6 +22,8 @@ const roomInput=document.querySelector('#room-input')
 const roomButton=document.querySelector("#room-button")
 const chatId_Element=document.querySelector("#chat-id")
 console.log(chatId_Element)
+
+
 //get time function
 function getCurrentTime() {
     const now = new Date();
@@ -37,6 +53,7 @@ const displayMessage=(message,type="received")=>{
     messageContainer.appendChild(div)
 }
 
+
 socket.on("connect",(e)=>{
     const socketId=socket.id
     alert(`Connected to server:${socket.id}`)
@@ -60,12 +77,28 @@ messageForm.addEventListener("submit",(e)=>{
 //join room
 roomButton.addEventListener('click',()=>{
     const room = roomInput.value
-    socket.emit("join-room",room)
+    socket.emit("join-room",room,message=>{
+        displayMessage(message,'received')
+    })
 })
 
 //receive response from server
 socket.on('receive-msg',message=>{
     displayMessage(message,'received')
 })
+
+//ping server
+
+let count=0
+setInterval(()=>{
+     socket.emit("ping",++count)
+},1000)
+
+//keyboard control for disconnect and reconnect
+document.addEventListener('keydown',e=>{
+    if(e.target.matches('input')) return
+    if(e.key==='c') socket.connect()
+    if(e.key=='d') socket.disconnect()
+}) 
 
 });
