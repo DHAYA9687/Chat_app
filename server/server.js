@@ -4,7 +4,8 @@ import { instrument } from "@socket.io/admin-ui";
 const io = new Server(3000, {
   cors: {
     origin: [
-      "https://chat-app-1-dhy2.onrender.com", // Frontend
+      "https://chat-app-1-dhy2.onrender.com",
+      "http:localhost:5173", // Frontend
       "https://admin.socket.io/", // Admin UI
     ],
     methods: ["GET", "POST"],
