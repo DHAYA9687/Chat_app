@@ -1,4 +1,5 @@
-import { io} from "socket.io-client";
+// import { io} from "socket.io-client";
+import { io } from "/node_modules/socket.io-client/dist/socket.io.esm.min.js";
 document.addEventListener("DOMContentLoaded",()=>{
 const socket=io("https://chat-app-fp4v.onrender.com",{
     transports:["websocket","polling"],
