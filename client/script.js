@@ -1,4 +1,4 @@
-import { io} from "socket.io-client"
+import { io} from "socket.io-client";
 document.addEventListener("DOMContentLoaded",()=>{
 const socket=io("https://chat-app-fp4v.onrender.com",{
     transports:["websocket","polling"],
