@@ -1,10 +1,10 @@
 import { io} from "socket.io-client"
 document.addEventListener("DOMContentLoaded",()=>{
-const socket=io("http://localhost:3000",{
+const socket=io("https://chat-app-fp4v.onrender.com",{
     transports:["websocket","polling"],
 })
 
-const userSocket = io("http://localhost:3000/user", {auth:{token:"test"},
+const userSocket = io("https://chat-app-fp4v.onrender.com/user", {auth:{token:"test"},
     transports: ["websocket", "polling"],
   });
   
